@@ -17,6 +17,11 @@ public class MyFirstProgram {
     Point p1 = new Point(10, 23);
     Point p2 = new Point(17, 22);
     System.out.println("Расстояние между точками p1 и p2 = " + p1.distance(p2));
+
+    TwoNumbers c1 = new TwoNumbers(15,2);
+    TwoNumbers c2 = new TwoNumbers(10, 5);
+    System.out.println("Сумма = " + c1.plus());
+    System.out.println("Сумма = " + c2.plus());
   }
 
   public static void hello(String somebody) {
