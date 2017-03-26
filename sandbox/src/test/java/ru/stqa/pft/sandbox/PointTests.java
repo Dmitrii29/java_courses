@@ -21,5 +21,21 @@ public class PointTests {
     Point p2 = new Point(17,22);
     Assert.assertEquals(Math.round(p1.distance(p2)), 7);
   }
+
+  @Test
+  public void testDistanceFromZeroToPoint ()
+  {
+    Point p1 = new Point(0,0);
+    Point p2 = new Point(17, 22);
+    Assert.assertEquals(Math.round(p1.distance(p2)), 28);
+  }
+
+  @Test
+  public void testDistance3 ()
+  {
+    Point p1 = new Point(17,22);
+    Point p2 = new Point(17, 22);
+    Assert.assertEquals(Math.round(p1.distance(p2)), 0);
+  }
 }
 
