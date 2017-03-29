@@ -39,7 +39,7 @@ public class ContactHelper extends HelperBase {
 
 
 
-
+    //нужно доделать
 
     if (!wd.findElement(By.xpath(contactData.getBday())).isSelected()) {
       wd.findElement(By.xpath(contactData.getBday())).click();
