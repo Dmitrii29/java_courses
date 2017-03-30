@@ -40,4 +40,12 @@ public class GroupHelper extends HelperBase{
         click(By.name("selected[]"));
       }
   }
+
+  public void initGroupModification() {
+    click(By.xpath(".//*[@id='content']/form/input[3]"));
+  }
+
+  public void submitGroupModification() {
+    click(By.xpath(".//*[@id='content']/form/input[3]"));
+  }
 }
