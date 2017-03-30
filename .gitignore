@@ -1,11 +1,14 @@
 .gradle
 build/
 
+.idea
+
 # User-specific stuff:
 .idea/workspace.xml
 .idea/tasks.xml
 .idea/dictionaries
 .idea/vcs.xml
+.idea/misc.xml
 
 # Ignore Gradle GUI config
 gradle-app.setting
