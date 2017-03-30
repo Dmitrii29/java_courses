@@ -3,6 +3,7 @@ package ru.stqa.pft.addressbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import ru.stqa.pft.addressbook.model.ContactData;
 
 /**
  * Created by Митрич on 29.03.2017.
@@ -22,6 +23,12 @@ public class HelperBase {
     click(locator);
     wd.findElement(locator).clear();
     wd.findElement(locator).sendKeys(text);
+  }
+
+  protected void selectDateOrMounth(String xpath) {
+    if (!wd.findElement(By.xpath(xpath)).isSelected()) {
+      wd.findElement(By.xpath(xpath)).click();
+    }
   }
 
   public boolean isAlertPresent() {

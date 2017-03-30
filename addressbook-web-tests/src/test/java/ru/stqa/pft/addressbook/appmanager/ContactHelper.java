@@ -20,7 +20,6 @@ public class ContactHelper extends HelperBase {
 
   public void fillContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstname());
-
     type(By.name("middlename"), contactData.getMiddlename());
     type(By.name("lastname"), contactData.getLastname());
     type(By.name("nickname"), contactData.getNickname());
@@ -36,32 +35,15 @@ public class ContactHelper extends HelperBase {
     type(By.name("email3"), contactData.getEmail3());
     type(By.name("homepage"), contactData.getHomepage());
     type(By.name("homepage"), contactData.getEmail3());
-
-
-
-    //нужно доделать
-
-    if (!wd.findElement(By.xpath(contactData.getBday())).isSelected()) {
-      wd.findElement(By.xpath(contactData.getBday())).click();
-    }
-    if (!wd.findElement(By.xpath(contactData.getBmounth())).isSelected()) {
-      wd.findElement(By.xpath(contactData.getBmounth())).click();
-    }
-    wd.findElement(By.name("byear")).click();
-    wd.findElement(By.name("byear")).clear();
-    wd.findElement(By.name("byear")).sendKeys(contactData.getByear());
-
-    if (!wd.findElement(By.xpath(contactData.getAnniversaryDay())).isSelected()) {
-      wd.findElement(By.xpath(contactData.getAnniversaryDay())).click();
-    }
-    if (!wd.findElement(By.xpath(contactData.getAnniversaryMounth())).isSelected()) {
-      wd.findElement(By.xpath(contactData.getAnniversaryMounth())).click();
-    }
-
-    wd.findElement(By.name("ayear")).click();
-    wd.findElement(By.name("ayear")).clear();
-    wd.findElement(By.name("ayear")).sendKeys(contactData.getAnniversaryYear());
+    selectDateOrMounth(contactData.getBday());
+    selectDateOrMounth(contactData.getBmounth());
+    type(By.name("byear"), contactData.getByear());
+    selectDateOrMounth(contactData.getAnniversaryDay());
+    selectDateOrMounth(contactData.getAnniversaryMounth());
+    type(By.name("ayear"), contactData.getAnniversaryYear());
   }
+
+
 
   public void goToAddNewContact() {
     click(By.linkText("add new"));
