@@ -24,6 +24,7 @@ public class ContactData {
   private final String anniversaryYear;
   private String group;
 
+
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear, String group) {
     this.firstname = firstname;
     this.middlename = middlename;
@@ -48,6 +49,7 @@ public class ContactData {
     this.anniversaryYear = anniversaryYear;
     this.group = group;
   }
+
 
   public String getFirstname() {
     return firstname;
