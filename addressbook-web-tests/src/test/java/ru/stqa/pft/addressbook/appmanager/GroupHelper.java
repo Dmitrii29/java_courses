@@ -8,7 +8,7 @@ import ru.stqa.pft.addressbook.model.GroupData;
 /**
  * Created by Митрич on 29.03.2017.
  */
-public class GroupHelper extends HelperBase{
+public class GroupHelper extends HelperBase {
 
   public GroupHelper(WebDriver wd) {
     super(wd);
@@ -36,10 +36,10 @@ public class GroupHelper extends HelperBase{
     click(By.xpath("//div[@id='content']/form/input[5]"));
   }
 
-  public void selectGroup() {
-      if (!wd.findElement(By.name("selected[]")).isSelected()) {
-        click(By.name("selected[]"));
-      }
+  public void selectGroup(int index) {
+    if (!wd.findElement(By.name("selected[]")).isSelected()) {
+      wd.findElements(By.name("selected[]")).get(index).click();
+    }
   }
 
   public void initGroupModification() {
