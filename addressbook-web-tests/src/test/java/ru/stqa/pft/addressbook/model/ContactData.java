@@ -1,31 +1,39 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private final String firstname;
-  private final String middlename;
-  private final String lastname;
-  private final String nickname;
-  private final String title;
-  private final String company;
-  private final String address;
-  private final String homeNumber;
-  private final String mobileNmunber;
-  private final String workNumber;
-  private final String faxNumber;
-  private final String email;
-  private final String email2;
-  private final String email3;
-  private final String homepage;
-  private final String bday;
-  private final String bmounth;
-  private final String byear;
-  private final String anniversaryDay;
-  private final String anniversaryMounth;
-  private final String anniversaryYear;
+  private int id;
+  private String firstname;
+  private String middlename;
+  private String lastname;
+  private String nickname;
+  private String title;
+  private String company;
+  private String address;
+  private String homeNumber;
+  private String mobileNumber;
+  private String workNumber;
+  private String faxNumber;
+  private String email;
+  private String email2;
+  private String email3;
+  private String homepage;
+  private String bday;
+  private String bmounth;
+  private String byear;
+  private String anniversaryDay;
+  private String anniversaryMounth;
+  private String anniversaryYear;
   private String group;
+
+  public ContactData(int id, String firstname, String lastname){
+    this.id = Integer.MAX_VALUE;
+    this.firstname = firstname;
+    this.lastname = lastname;
+  }
 
 
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear, String group) {
+    this.id = id;
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -34,7 +42,7 @@ public class ContactData {
     this.company = company;
     this.address = address;
     this.homeNumber = homeNumber;
-    this.mobileNmunber = mobileNmunber;
+    this.mobileNumber = mobileNmunber;
     this.workNumber = workNumber;
     this.faxNumber = faxNumber;
     this.email = email;
@@ -48,6 +56,10 @@ public class ContactData {
     this.anniversaryMounth = anniversaryMounth;
     this.anniversaryYear = anniversaryYear;
     this.group = group;
+  }
+
+  public int getId() {
+    return id;
   }
 
 
@@ -83,8 +95,8 @@ public class ContactData {
     return homeNumber;
   }
 
-  public String getMobileNmunber() {
-    return mobileNmunber;
+  public String getMobileNumber() {
+    return mobileNumber;
   }
 
   public String getWorkNumber() {
@@ -137,5 +149,31 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = firstname != null ? firstname.hashCode() : 0;
+    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
   }
 }
