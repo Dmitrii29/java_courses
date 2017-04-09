@@ -28,11 +28,11 @@ public class ContactModificationTests extends TestBase {
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size());
 
-    after.remove(before.size() - 1);
-    after.add(contact);
+    before.remove(before.size() - 1);
+    before.add(contact);
     Comparator<? super ContactData> byId = (c1, c2) -> Integer.compare(c1.getId(), c2.getId());
     before.sort(byId);
     after.sort(byId);
-    Assert.assertEquals(after,before);
+    Assert.assertEquals(before,after);
   }
 }
