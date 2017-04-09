@@ -26,14 +26,14 @@ public class ContactData {
   private String group;
 
   public ContactData(int id, String firstname, String lastname){
-    this.id = Integer.MAX_VALUE;
+    this.id = id;
     this.firstname = firstname;
     this.lastname = lastname;
   }
 
 
   public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear, String group) {
-    this.id = id;
+    this.id = Integer.MAX_VALUE;
     this.firstname = firstname;
     this.middlename = middlename;
     this.lastname = lastname;
@@ -56,35 +56,6 @@ public class ContactData {
     this.anniversaryMounth = anniversaryMounth;
     this.anniversaryYear = anniversaryYear;
     this.group = group;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) return true;
-    if (o == null || getClass() != o.getClass()) return false;
-
-    ContactData that = (ContactData) o;
-
-    if (id != that.id) return false;
-    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
-    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = id;
-    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
-    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
-    return result;
-  }
-
-  @Override
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            '}';
   }
 
   public int getId() {
@@ -180,4 +151,32 @@ public class ContactData {
     return group;
   }
 
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+    if (o == null || getClass() != o.getClass()) return false;
+
+    ContactData that = (ContactData) o;
+
+    if (id != that.id) return false;
+    if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
+    return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
+  }
+
+  @Override
+  public int hashCode() {
+    int result = id;
+    result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
+    result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
+  }
 }
