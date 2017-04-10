@@ -4,9 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Митрич on 30.03.2017.
@@ -19,12 +17,12 @@ public class ContactDeletionTests extends TestBase {
     if (! app.getContactHelper().isThereAContact()) {
       ContactData contact = new ContactData("Admin", "Adminovich", "Admiskii", "Super admin", "Title", "java-courses", "address", "567555", "555567", "123456", "654321", "123456@mail.ru", "123456@mail.ru", "123456@mail.ru", "123456@mail.ru", "//div[@id='content']/form/select[1]//option[3]", "//div[@id='content']/form/select[2]//option[2]", "1992", "//div[@id='content']/form/select[3]//option[3]", "//div[@id='content']/form/select[4]//option[7]", "1992", "test1");
       app.getContactHelper().createContact(contact);
-      app.getNavigationHelper().goToHomePage();
+      app.goTo().goToHomePage();
     }
     List<ContactData> before = app.getContactHelper().getContactList();
     app.getContactHelper().selectContact(before.size() -1);
     app.getContactHelper().deleteContact();
-    app.getNavigationHelper().goToHomePage();
+    app.goTo().goToHomePage();
     List<ContactData> after = app.getContactHelper().getContactList();
     Assert.assertEquals(after.size(), before.size() - 1);
 
