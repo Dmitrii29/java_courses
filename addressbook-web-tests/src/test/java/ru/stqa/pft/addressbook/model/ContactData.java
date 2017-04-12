@@ -32,7 +32,7 @@ public class ContactData {
   }
 
 
-  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear, String group) {
+  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear) {
     this.id = Integer.MAX_VALUE;
     this.firstname = firstname;
     this.middlename = middlename;
@@ -55,7 +55,6 @@ public class ContactData {
     this.anniversaryDay = anniversaryDay;
     this.anniversaryMounth = anniversaryMounth;
     this.anniversaryYear = anniversaryYear;
-    this.group = group;
   }
 
   public int getId() {
