@@ -1,7 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 public class ContactData {
-  private int id;
+  private int id = Integer.MAX_VALUE;
   private String firstname;
   private String middlename;
   private String lastname;
@@ -25,42 +25,9 @@ public class ContactData {
   private String anniversaryYear;
   private String group;
 
-  public ContactData(int id, String firstname, String lastname){
-    this.id = id;
-    this.firstname = firstname;
-    this.lastname = lastname;
-  }
-
-
-  public ContactData(String firstname, String middlename, String lastname, String nickname, String title, String company, String address, String homeNumber, String mobileNmunber, String workNumber, String faxNumber, String email, String email2, String email3, String homepage, String bday, String bmounth, String byear, String anniversaryDay, String anniversaryMounth, String anniversaryYear) {
-    this.id = Integer.MAX_VALUE;
-    this.firstname = firstname;
-    this.middlename = middlename;
-    this.lastname = lastname;
-    this.nickname = nickname;
-    this.title = title;
-    this.company = company;
-    this.address = address;
-    this.homeNumber = homeNumber;
-    this.mobileNumber = mobileNmunber;
-    this.workNumber = workNumber;
-    this.faxNumber = faxNumber;
-    this.email = email;
-    this.email2 = email2;
-    this.email3 = email3;
-    this.homepage = homepage;
-    this.bday = bday;
-    this.bmounth = bmounth;
-    this.byear = byear;
-    this.anniversaryDay = anniversaryDay;
-    this.anniversaryMounth = anniversaryMounth;
-    this.anniversaryYear = anniversaryYear;
-  }
-
   public int getId() {
     return id;
   }
-
 
   public String getFirstname() {
     return firstname;
@@ -150,6 +117,135 @@ public class ContactData {
     return group;
   }
 
+
+  public ContactData withId(int id) {
+    this.id = id;
+    return this;
+  }
+
+  public ContactData withFirstname(String firstname) {
+    this.firstname = firstname;
+    return this;
+  }
+
+  public ContactData withMiddlename(String middlename) {
+    this.middlename = middlename;
+    return this;
+  }
+
+  public ContactData withLastname(String lastname) {
+    this.lastname = lastname;
+    return this;
+  }
+
+  public ContactData withNickname(String nickname) {
+    this.nickname = nickname;
+    return this;
+  }
+
+  public ContactData withTitle(String title) {
+    this.title = title;
+    return this;
+  }
+
+  public ContactData withCompany(String company) {
+    this.company = company;
+    return this;
+  }
+
+  public ContactData withAddress(String address) {
+    this.address = address;
+    return this;
+  }
+
+  public ContactData withHomeNumber(String homeNumber) {
+    this.homeNumber = homeNumber;
+    return this;
+  }
+
+  public ContactData withMobileNumber(String mobileNumber) {
+    this.mobileNumber = mobileNumber;
+    return this;
+  }
+
+  public ContactData withWorkNumber(String workNumber) {
+    this.workNumber = workNumber;
+    return this;
+  }
+
+  public ContactData withFaxNumber(String faxNumber) {
+    this.faxNumber = faxNumber;
+    return this;
+  }
+
+
+  public ContactData withEmail(String email) {
+    this.email = email;
+    return this;
+
+  }
+
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
+    return this;
+  }
+
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+
+  public ContactData withHomepage(String homepage) {
+    this.homepage = homepage;
+    return this;
+  }
+
+  public ContactData withBday(String bday) {
+    this.bday = bday;
+    return this;
+  }
+
+  public ContactData withBmounth(String bmounth) {
+    this.bmounth = bmounth;
+    return this;
+  }
+
+  public ContactData withByear(String byear) {
+    this.byear = byear;
+    return this;
+  }
+
+  public ContactData withnniversaryDay(String anniversaryDay) {
+    this.anniversaryDay = anniversaryDay;
+    return this;
+  }
+
+  public ContactData withAnniversaryMounth(String anniversaryMounth) {
+    this.anniversaryMounth = anniversaryMounth;
+    return this;
+  }
+
+  public ContactData withAnniversaryYear(String anniversaryYear) {
+    this.anniversaryYear = anniversaryYear;
+    return this;
+  }
+
+  public ContactData withGroup(String group) {
+    this.group = group;
+    return this;
+  }
+
+
+  @Override
+
+  public String toString() {
+    return "ContactData{" +
+            "id=" + id +
+            ", firstname='" + firstname + '\'' +
+            ", lastname='" + lastname + '\'' +
+            '}';
+  }
+
   @Override
   public boolean equals(Object o) {
     if (this == o) return true;
@@ -157,9 +253,7 @@ public class ContactData {
 
     ContactData that = (ContactData) o;
 
-    if (id != Integer.MAX_VALUE && that.id != Integer.MAX_VALUE && id != that.id) {
-      return false;
-    }
+    if (id != that.id) return false;
     if (firstname != null ? !firstname.equals(that.firstname) : that.firstname != null) return false;
     return lastname != null ? lastname.equals(that.lastname) : that.lastname == null;
   }
@@ -170,15 +264,5 @@ public class ContactData {
     result = 31 * result + (firstname != null ? firstname.hashCode() : 0);
     result = 31 * result + (lastname != null ? lastname.hashCode() : 0);
     return result;
-  }
-
-  @Override
-
-  public String toString() {
-    return "ContactData{" +
-            "id=" + id +
-            ", firstname='" + firstname + '\'' +
-            ", lastname='" + lastname + '\'' +
-            '}';
   }
 }

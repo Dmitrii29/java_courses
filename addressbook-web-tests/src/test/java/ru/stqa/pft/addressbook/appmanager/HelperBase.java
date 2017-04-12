@@ -4,8 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoAlertPresentException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import ru.stqa.pft.addressbook.model.ContactData;
 
 /**
  * Created by Митрич on 29.03.2017.

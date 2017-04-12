@@ -1,10 +1,11 @@
 package ru.stqa.pft.addressbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Митрич on 30.03.2017.
@@ -12,21 +13,24 @@ import java.util.List;
 
 public class ContactDeletionTests extends TestBase {
 
-  @Test
-  public void testContactDeletion(){
-    if (! app.getContactHelper().isThereAContact()) {
-      ContactData contact = new ContactData("Admin", "Adminovich", "Admiskii", "Super admin", "Title", "java-courses", "address", "567555", "555567", "123456", "654321", "123456@mail.ru", "123456@mail.ru", "123456@mail.ru", "123456@mail.ru", "//div[@id='content']/form/select[1]//option[3]", "//div[@id='content']/form/select[2]//option[2]", "1992", "//div[@id='content']/form/select[3]//option[3]", "//div[@id='content']/form/select[4]//option[7]", "1992");
-      app.getContactHelper().createContact(contact);
+  @BeforeMethod
+  public void ensurePreconditions(){
+    if (app.contact().all().size() == 0) {
+      app.contact().create(new ContactData().withFirstname("Admin").withLastname("Adminskii").withMiddlename("Adminovich").withGroup("test1"));
       app.goTo().goToHomePage();
     }
-    List<ContactData> before = app.getContactHelper().getContactList();
-    app.getContactHelper().selectContact(before.size() -1);
-    app.getContactHelper().deleteContact();
+  }
+
+  @Test
+  public void testContactDeletion(){
+    Set<ContactData> before = app.contact().all();
+    ContactData deletedContact = before.iterator().next();
+    app.contact().delete(deletedContact);
     app.goTo().goToHomePage();
-    List<ContactData> after = app.getContactHelper().getContactList();
+    Set<ContactData> after = app.contact().all();
     Assert.assertEquals(after.size(), before.size() - 1);
 
-    before.remove(before.size() - 1);
+    before.remove(deletedContact);
     Assert.assertEquals(before, after);
   }
 }
