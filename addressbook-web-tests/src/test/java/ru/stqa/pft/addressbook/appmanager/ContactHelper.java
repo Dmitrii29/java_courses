@@ -103,6 +103,9 @@ public class ContactHelper extends HelperBase {
     wd.findElement(By.cssSelector("a[href='edit.php?id="+id+"']")).click();
   }
 
+  public int getContactCount() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
 
   public void modify(ContactData contact) {
     editContactById(contact.getId());
