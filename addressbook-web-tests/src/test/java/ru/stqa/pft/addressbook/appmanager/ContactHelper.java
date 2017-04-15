@@ -146,14 +146,15 @@ public class ContactHelper extends HelperBase {
       return new Contacts(contactsCache);
     }
     contactsCache = new Contacts();
-    List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]//tr[@name]"));
-    for (WebElement element : elements) {
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      String lastName = element.findElement(By.xpath(".//td[2]")).getText();
-      String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-      String[] phones = elements.get(6).getText().split("\n");
+    List<WebElement>  rows = wd.findElements(By.xpath("//*[@id=\"maintable\"]//tr[@name]"));
+    for (WebElement row : rows) {
+      List<WebElement> cells = row.findElements(By.tagName("td"));
+      int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("id"));
+      String lastName = cells.get(1).getText();
+      String firstName = cells.get(2).getText();
+      String allPhones = cells.get(5).getText();
       ContactData contact = new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
-              .withHomeNumber(phones[0]).withMobileNumber(phones[1]).withWorkNumber(phones[2]);
+              .withAllPhones(allPhones);
       contactsCache.add(contact);
     }
     return new Contacts(contactsCache);

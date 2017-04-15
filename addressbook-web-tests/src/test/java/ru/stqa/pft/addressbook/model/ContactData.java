@@ -13,6 +13,7 @@ public class ContactData {
   private String mobileNumber;
   private String workNumber;
   private String faxNumber;
+  private String allPhones;
   private String email;
   private String email2;
   private String email3;
@@ -115,6 +116,10 @@ public class ContactData {
 
   public String getGroup() {
     return group;
+  }
+
+  public String getAllPhones() {
+    return allPhones;
   }
 
 
@@ -234,6 +239,13 @@ public class ContactData {
     this.group = group;
     return this;
   }
+
+  public ContactData withAllPhones(String allPhones) {
+    this.allPhones = allPhones;
+    return this;
+  }
+
+
 
 
   @Override
