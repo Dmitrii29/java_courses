@@ -100,7 +100,7 @@ public class ContactHelper extends HelperBase {
   }
 
   public void editContactById(int id) {
-    wd.findElement(By.cssSelector("a[href='edit.php?id="+id+"']")).click();
+    wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
   }
 
   public int getContactCount() {
@@ -148,12 +148,26 @@ public class ContactHelper extends HelperBase {
     contactsCache   = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]//tr[@name]"));
     for (WebElement element : elements) {
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
-      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactData contact = new ContactData().withId(id).withFirstname(firstName).withLastname(lastName);
+      String[] phones = elements.get(6).getText().split("\n");
+      ContactData contact = new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
+              .withHomeNumber(phones[0]).withMobileNumber(phones[1]).withWorkNumber(phones[2]);
       contactsCache.add(contact);
     }
     return new Contacts(contactsCache);
+  }
+
+  public ContactData infoFromEditForm(ContactData contact) {
+    editContactById(contact.getId());
+    String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
+    String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
+            .withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
   }
 }
