@@ -145,7 +145,7 @@ public class ContactHelper extends HelperBase {
     if (contactsCache != null) {
       return new Contacts(contactsCache);
     }
-    contactsCache   = new Contacts();
+    contactsCache = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//*[@id=\"maintable\"]//tr[@name]"));
     for (WebElement element : elements) {
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
