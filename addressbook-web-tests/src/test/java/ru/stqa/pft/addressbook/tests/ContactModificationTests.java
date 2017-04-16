@@ -20,7 +20,9 @@ public class ContactModificationTests extends TestBase {
   @BeforeMethod
   public void ensurePreconditions(){
     if (app.contact().all().size() == 0) {
-      app.contact().create(new ContactData().withFirstname("Andruxa").withLastname("Kim").withHomeNumber("111").withMobileNumber("222").withWorkNumber("333").withGroup("test1"));
+      app.contact().create(new ContactData().withFirstname("Andruxa").withLastname("Kim")
+              .withHomeNumber("111").withMobileNumber("222").withWorkNumber("333").withGroup("test1")
+              .withAddress("Street 142 kv.2").withEmail("123@mail.ru").withEmail2("321@mail.ru").withEmail3("654@mail.ru"));
       app.goTo().goToHomePage();
     }
   }
