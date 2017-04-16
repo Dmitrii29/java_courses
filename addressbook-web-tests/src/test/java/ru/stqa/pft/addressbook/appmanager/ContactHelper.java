@@ -9,8 +9,10 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Митрич on 29.03.2017.
@@ -150,11 +152,9 @@ public class ContactHelper extends HelperBase {
       int id = Integer.parseInt(row.findElement(By.tagName("input")).getAttribute("id"));
       String lastName = cells.get(1).getText();
       String firstName = cells.get(2).getText();
-      String address = cells.get(3).getText();
-      String allEmails = cells.get(4).getText();
       String allPhones = cells.get(5).getText();
       ContactData contact = new ContactData().withId(id).withFirstname(firstName).withLastname(lastName)
-              .withAllPhones(allPhones).withAddress(address).withAllEmails(allEmails);
+              .withAllPhones(allPhones);
       contactsCache.add(contact);
     }
     return new Contacts(contactsCache);
@@ -164,23 +164,11 @@ public class ContactHelper extends HelperBase {
     editContactById(contact.getId());
     String firstname = wd.findElement(By.name("firstname")).getAttribute("value");
     String lastname = wd.findElement(By.name("lastname")).getAttribute("value");
-    String homePhone = wd.findElement(By.name("home")).getAttribute("value");
-    String mobilePhone = wd.findElement(By.name("mobile")).getAttribute("value");
-    String workPhone = wd.findElement(By.name("work")).getAttribute("value");
-    String email = wd.findElement(By.name("email")).getAttribute("value");
-    String email2 = wd.findElement(By.name("email2")).getAttribute("value");
-    String email3 = wd.findElement(By.name("email3")).getAttribute("value");
-
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
     wd.navigate().back();
     return new ContactData().withId(contact.getId()).withFirstname(firstname).withLastname(lastname)
-            .withHomeNumber(homePhone).withMobileNumber(mobilePhone).withWorkNumber(workPhone)
-            .withEmail(email).withEmail2(email2).withEmail3(email3);
-  }
-
-  public ContactData addressInfoFromEditForm(ContactData contact) {
-    editContactById(contact.getId());
-    String address = wd.findElement(By.xpath("//textarea[@name='address']")).getText();
-    wd.navigate().back();
-    return new ContactData().withAddress(address);
+            .withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
   }
 }
