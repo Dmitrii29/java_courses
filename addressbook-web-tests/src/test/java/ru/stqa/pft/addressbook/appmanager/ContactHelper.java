@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +9,7 @@ import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.tests.ContactDetailsTests;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -182,5 +184,35 @@ public class ContactHelper extends HelperBase {
     String address = wd.findElement(By.xpath("//textarea[@name='address']")).getText();
     wd.navigate().back();
     return new ContactData().withAddress(address);
+  }
+
+  public ContactData phoneEditForm(int contactId) {
+    editContactById(contactId);
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    if (StringUtils.isNotBlank(home)) {
+      home = "H: " + home;
+    }
+    if (StringUtils.isNotBlank(mobile)) {
+      mobile = "M: " + mobile;
+    }
+    if (StringUtils.isNotBlank(work)) {
+      work = "W: " + work;
+    }
+    return new ContactData().withId(contactId).withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
+  }
+
+  private void contactDetailsDataById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s", id))).click();
+  }
+
+  public String infoFromDetailsForm(int contactId) {
+    contactDetailsDataById(contactId);
+    String[] allData = wd.findElement(By.xpath("//*[@id='content']")).getText().split("\n");
+    wd.navigate().back();
+    return Arrays.stream(allData)
+            .filter((s) -> !s.equals("")).map(ContactDetailsTests::phoneCleaned).collect(Collectors.joining(";"));
   }
 }
