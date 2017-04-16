@@ -1,5 +1,6 @@
 package ru.stqa.pft.addressbook.appmanager;
 
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -7,12 +8,12 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
+import ru.stqa.pft.addressbook.tests.ContactDetailsTests;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Митрич on 29.03.2017.
@@ -51,11 +52,11 @@ public class ContactHelper extends HelperBase {
 //    selectDateOrMounth(contactData.getAnniversaryMounth());
 //    type(By.name("ayear"), contactData.getAnniversaryYear());
 
-    if (creation){
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-    } else {
-      Assert.assertFalse(isElementPresent(By.name("new_group")));
-      }
+//    if (creation){
+//      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+//    } else {
+//      Assert.assertFalse(isElementPresent(By.name("new_group")));
+//      }
     }
 
   public void goToAddNewContact() {
@@ -101,6 +102,10 @@ public class ContactHelper extends HelperBase {
 
   public void editContactById(int id) {
     wd.findElement(By.cssSelector(String.format("a[href='edit.php?id=%s']", id))).click();
+  }
+
+  public void initContactDetailsById(int id) {
+    wd.findElement(By.cssSelector(String.format("a[href='view.php?id=%s']", id))).click();
   }
 
   public int getContactCount() {
@@ -184,5 +189,31 @@ public class ContactHelper extends HelperBase {
     String address =wd.findElement(By.xpath("//textarea[@name='address']")).getText();
     wd.navigate().back();
     return new ContactData().withAddress(address);
+  }
+
+  public String infoFromDetailsForm(int contactId) {
+    initContactDetailsById(contactId);
+    String[] allInfo = wd.findElement(By.xpath("//*[@id='content']")).getText().split("\n");
+    wd.navigate().back();
+    return Arrays.stream(allInfo)
+            .filter((s) -> !s.equals("")).map(ContactDetailsTests::phoneCleaned).collect(Collectors.joining(";"));
+  }
+
+  public ContactData phonesFromEditForm(int contactId) {
+    editContactById(contactId);
+    String home = wd.findElement(By.name("home")).getAttribute("value");
+    String mobile = wd.findElement(By.name("mobile")).getAttribute("value");
+    String work = wd.findElement(By.name("work")).getAttribute("value");
+    wd.navigate().back();
+    if (StringUtils.isNotBlank(home)) {
+      home = "H: " + home;
+    }
+    if (StringUtils.isNotBlank(mobile)) {
+      mobile = "M: " + mobile;
+    }
+    if (StringUtils.isNotBlank(work)) {
+      work = "W: " + work;
+    }
+    return new ContactData().withId(contactId).withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
   }
 }
