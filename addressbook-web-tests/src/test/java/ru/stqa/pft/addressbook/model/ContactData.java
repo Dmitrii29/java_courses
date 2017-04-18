@@ -9,7 +9,7 @@ public class ContactData {
   @Expose
   private String firstname;
   private String middlename;
-
+  @Expose
   private String lastname;
   private String nickname;
   private String title;

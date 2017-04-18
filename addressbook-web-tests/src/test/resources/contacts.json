@@ -1,6 +1,7 @@
 [
   {
     "firstname": "Vovan 0",
+    "lastname": "Ivanov 0",
     "address": "Street 0",
     "homeNumber": "HomePhone 0",
     "mobileNumber": "MobilePhone 0",
@@ -11,6 +12,7 @@
   },
   {
     "firstname": "Vovan 1",
+    "lastname": "Ivanov 1",
     "address": "Street 1",
     "homeNumber": "HomePhone 1",
     "mobileNumber": "MobilePhone 1",
@@ -21,6 +23,7 @@
   },
   {
     "firstname": "Vovan 2",
+    "lastname": "Ivanov 2",
     "address": "Street 2",
     "homeNumber": "HomePhone 2",
     "mobileNumber": "MobilePhone 2",
