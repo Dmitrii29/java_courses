@@ -5,12 +5,12 @@ import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import com.thoughtworks.xstream.annotations.XStreamOmitField;
 
-@XStreamAlias("group")
+@XStreamAlias("group") //аннотация для генерации данных в формате XML, делает блоки <group> </group>
 public class GroupData {
 
-  @XStreamOmitField
+  @XStreamOmitField //аннотация для генерации данных в формате XML, означает, что данную перменную включать не надо
   private int id = Integer.MAX_VALUE;
-  @Expose
+  @Expose //аннотация для генерации данных в формате Json, означает, что данную переменную надо включать в файл
   private String name;
   @Expose
   private String header;

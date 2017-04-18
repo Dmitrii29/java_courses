@@ -1,0 +1,32 @@
+[
+  {
+    "firstname": "Vovan 0",
+    "address": "Street 0",
+    "homeNumber": "HomePhone 0",
+    "mobileNumber": "MobilePhone 0",
+    "workNumber": "WorkPhone 0",
+    "email": "120@mail.ru",
+    "email2": "023@mail.ru",
+    "email3": "103@mail.ru"
+  },
+  {
+    "firstname": "Vovan 1",
+    "address": "Street 1",
+    "homeNumber": "HomePhone 1",
+    "mobileNumber": "MobilePhone 1",
+    "workNumber": "WorkPhone 1",
+    "email": "121@mail.ru",
+    "email2": "123@mail.ru",
+    "email3": "113@mail.ru"
+  },
+  {
+    "firstname": "Vovan 2",
+    "address": "Street 2",
+    "homeNumber": "HomePhone 2",
+    "mobileNumber": "MobilePhone 2",
+    "workNumber": "WorkPhone 2",
+    "email": "122@mail.ru",
+    "email2": "223@mail.ru",
+    "email3": "123@mail.ru"
+  }
+]
