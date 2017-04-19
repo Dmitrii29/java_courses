@@ -6,9 +6,10 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
-import ru.stqa.pft.addressbook.model.GroupData;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,32 +19,20 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
 
-//  @DataProvider
-//  public Iterator<Object[]> validContactsFromJson() throws IOException {
-//    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"));
-//    String json = "";
-//    String line = reader.readLine();
-//    while (line != null) {
-//      json += line;
-//      line = reader.readLine();
-//    }
-//    Gson gson = new Gson();
-//    List<ContactData> contact = gson.fromJson(json, new TypeToken<ContactData>(){}.getType());
-//    return contact.stream().map((c) -> new Object[]{c}).collect(Collectors.toList()).iterator();
-//  }
-
   @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
-    BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"));
-    String json = "";
-    String line = reader.readLine();
-    while (line != null){
-      json += line;
-      line = reader.readLine();
+    try (BufferedReader reader = new BufferedReader(new FileReader("src/test/resources/contacts.json"))) {
+      String json = "";
+      String line = reader.readLine();
+      while (line != null) {
+        json += line;
+        line = reader.readLine();
+      }
+      Gson gson = new Gson();
+      List<ContactData> contact = gson.fromJson(json, new TypeToken<List<ContactData>>() {
+      }.getType()); // всё равно что List<GroupData>.class
+      return contact.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
-    Gson gson = new Gson();
-    List<ContactData> contact = gson.fromJson(json, new TypeToken<List<ContactData>>(){}.getType()); // всё равно что List<GroupData>.class
-    return contact.stream().map((g) -> new Object[] {g}).collect(Collectors.toList()).iterator();
   }
 
   @Test (dataProvider = "validContactsFromJson")
