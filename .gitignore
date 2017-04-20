@@ -2,6 +2,7 @@
 build/
 
 .idea
+*.log
 
 # User-specific stuff:
 .idea/workspace.xml
