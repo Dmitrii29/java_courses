@@ -8,6 +8,7 @@ import ru.stqa.pft.addressbook.model.ContactData;
 import ru.stqa.pft.addressbook.model.Contacts;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
@@ -37,12 +38,14 @@ public class ContactCreationTests extends TestBase {
 
   @Test (dataProvider = "validContactsFromJson")
   public void testContactCreation(ContactData contact) {
-    Contacts before = app.contact().all();
+    //Contacts before = app.contact().all(); // - получение кол-ва контактов с интерфейса
+    Contacts before = app.db().contacts();
     //File photo = new File("src/test/resources/pic1.jpg"); //добавление фото
     app.contact().create(contact);
     app.goTo().goToHomePage();
     assertThat(app.contact().getContactCount(), equalTo(before.size() + 1));
-    Contacts after = app.contact().all();
+    //Contacts before = app.contact().all(); // - получение кол-ва контактов с интерфейса
+    Contacts after = app.db().contacts();
 
     assertThat(after,
             equalTo(before.withAdded(contact.withId(after.stream().mapToInt((c) -> c.getId()).max().getAsInt()))));
