@@ -58,10 +58,12 @@ public class GroupCreationTests extends TestBase {
   @Test (dataProvider = "validGroupsFromJson")
   public void testGroupCreation(GroupData group) {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    //Groups before = app.group().all();  - для списков
+    Groups before = app.db().groups();
     app.group().create(group);
     assertThat(app.group().getGroupCount(), equalTo(before.size() +1));
-    Groups after = app.group().all();
+    //Groups after = app.group().all();  - для списков
+    Groups after = app.db().groups();
 
     assertThat(after, equalTo(
             before.withAdded(group.withId(after.stream().mapToInt((g) -> g.getId()).max().getAsInt()))));
@@ -70,11 +72,13 @@ public class GroupCreationTests extends TestBase {
   @Test (enabled = false)
   public void testBadGroupCreation() {
     app.goTo().groupPage();
-    Groups before = app.group().all();
+    //Groups before = app.group().all(); - получение кол-ва групп с интерфейса
+    Groups before = app.db().groups();
     GroupData group = new GroupData().withName("test1'").withHeader(null).withFooter(null);
     app.group().create(group);
     assertThat(app.group().getGroupCount(), equalTo(before.size()));
-    Groups after = app.group().all();
+    //Groups after = app.group().all();  - получение кол-ва групп с интерфейса
+    Groups after = app.db().groups();
 
 
     assertThat(after, equalTo(before));
