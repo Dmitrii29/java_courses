@@ -26,6 +26,9 @@ task testGroups(type: Test) {
         if(project.hasProperty('target')) {  //gradlew -Ptarget=local
             systemProperty 'target', "${target}"
         }
+        if(project.hasProperty('verifyUI')) {  //gradlew -Ptarget=local
+            systemProperty 'verifyUI', "${verifyUI}"
+        }
     }
 }
 
@@ -37,6 +40,9 @@ task testContacts(type: Test) {
         }
         if(project.hasProperty('target')) {  //gradlew -Ptarget=local
             systemProperty 'target', "${target}"
+        }
+        if(project.hasProperty('verifyUI')) {  //gradlew -Ptarget=local
+            systemProperty 'verifyUI', "${verifyUI}"
         }
     }
 }

@@ -56,5 +56,6 @@ public class ContactModificationTests extends TestBase {
     Contacts after = app.db().contacts();
 
     assertThat(after, equalTo(before.withOut(modifiedContact).withAdded(contact)));
+    verifyContactsListInUI(); //добавлен булевыый параметр в конфигурации теста -DverifyUI=true
   }
 }

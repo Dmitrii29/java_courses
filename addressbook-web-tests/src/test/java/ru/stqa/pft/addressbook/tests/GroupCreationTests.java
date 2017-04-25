@@ -80,7 +80,7 @@ public class GroupCreationTests extends TestBase {
     //Groups after = app.group().all();  - получение кол-ва групп с интерфейса
     Groups after = app.db().groups();
 
-
     assertThat(after, equalTo(before));
+    verifyGroupListInUI(); //добавлен булевыый параметр в конфигурации теста -DverifyUI=true
   }
 }

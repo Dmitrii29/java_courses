@@ -40,5 +40,6 @@ public class GroupDeletionTests extends TestBase {
     Groups after = app.db().groups();
 
     assertThat(after, equalToObject(before.withOut(deletedGroup)));
+    verifyGroupListInUI(); //добавлен булевыый параметр в конфигурации теста -DverifyUI=true
   }
 }
