@@ -52,12 +52,12 @@ public class ContactHelper extends HelperBase {
 //    selectDateOrMounth(contactData.getAnniversaryDay());
 //    selectDateOrMounth(contactData.getAnniversaryMounth());
 //    type(By.name("ayear"), contactData.getAnniversaryYear());
-
-//    if (creation){
-//      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-//    } else {
-//      Assert.assertFalse(isElementPresent(By.name("new_group")));
-//      }
+/*
+    if (creation){
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
+      }*/
     }
 
   public void goToAddNewContact() {
@@ -139,7 +139,7 @@ public class ContactHelper extends HelperBase {
       String lastName = element.findElement(By.xpath(".//td[2]")).getText();
       String firstName = element.findElement(By.xpath(".//td[3]")).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("id"));
-      ContactData contact = new ContactData().withFirstname("Admin").withLastname("Adminskii").withGroup("test1");
+      ContactData contact = new ContactData().withFirstname("Admin").withLastname("Adminskii");
       contacts.add(contact);
     }
     return contacts;

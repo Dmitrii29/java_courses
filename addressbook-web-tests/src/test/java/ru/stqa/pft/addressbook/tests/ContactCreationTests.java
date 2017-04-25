@@ -30,14 +30,13 @@ public class ContactCreationTests extends TestBase {
         line = reader.readLine();
       }
       Gson gson = new Gson();
-      List<ContactData> contact = gson.fromJson(json, new TypeToken<List<ContactData>>() {
-      }.getType()); // всё равно что List<GroupData>.class
+      List<ContactData> contact = gson.fromJson(json, new TypeToken<List<ContactData>>() {}.getType()); // всё равно что List<GroupData>.class
       return contact.stream().map((g) -> new Object[]{g}).collect(Collectors.toList()).iterator();
     }
   }
 
   @Test (dataProvider = "validContactsFromJson")
-  public void testContactCreation(ContactData contact) {
+  public void testContactCreationFromJson(ContactData contact) {
     //Contacts before = app.contact().all(); // - получение кол-ва контактов с интерфейса
     Contacts before = app.db().contacts();
     //File photo = new File("src/test/resources/pic1.jpg"); //добавление фото

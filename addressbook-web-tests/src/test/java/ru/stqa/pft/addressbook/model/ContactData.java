@@ -5,6 +5,8 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "addressbook")
@@ -102,8 +104,11 @@ public class ContactData {
   @Transient
   private String anniversaryYear;
 
-  @Transient
-  private String group;
+  //аннотация для отношения многие ко многим
+  @ManyToMany(fetch = FetchType.EAGER) //EAGER озчает вытаскивать как можно большеинфы из бд за один заход
+  //пояснения для hibernate какая таблица используетя для связи, колонка текущего класса id, обратный столбец (объект другого типа,т.е группа)
+  @JoinTable(name = "address_in_groups", joinColumns = @JoinColumn(name = "id"), inverseJoinColumns = @JoinColumn(name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
 
 
   public int getId() {
@@ -194,10 +199,6 @@ public class ContactData {
     return anniversaryYear;
   }
 
-  public String getGroup() {
-    return group;
-  }
-
   public String getAllPhones() {
     return allPhones;
   }
@@ -208,6 +209,10 @@ public class ContactData {
 
   public File getPhoto() {
     return new File(photo);
+  }
+
+  public Groups getGroups() {
+    return new Groups(groups);
   }
 
 
@@ -325,11 +330,6 @@ public class ContactData {
 
   public ContactData withAnniversaryYear(String anniversaryYear) {
     this.anniversaryYear = anniversaryYear;
-    return this;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
     return this;
   }
 
