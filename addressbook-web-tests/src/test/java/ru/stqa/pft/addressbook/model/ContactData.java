@@ -1,6 +1,7 @@
 package ru.stqa.pft.addressbook.model;
 
 import com.google.gson.annotations.Expose;
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -8,6 +9,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+@XStreamAlias("contact")
 @Entity
 @Table(name = "addressbook")
 public class ContactData {

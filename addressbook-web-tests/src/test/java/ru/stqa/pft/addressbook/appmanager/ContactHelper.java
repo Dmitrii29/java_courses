@@ -52,8 +52,7 @@ public class ContactHelper extends HelperBase {
 //    selectDateOrMounth(contactData.getAnniversaryDay());
 //    selectDateOrMounth(contactData.getAnniversaryMounth());
 //    type(By.name("ayear"), contactData.getAnniversaryYear());
-/*
-    if (creation){
+/*    if (creation){
       new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
@@ -216,5 +215,19 @@ public class ContactHelper extends HelperBase {
       work = "W: " + work;
     }
     return new ContactData().withId(contactId).withHomeNumber(home).withMobileNumber(mobile).withWorkNumber(work);
+  }
+
+  public void addContactToGroup(int id, String name) {
+    selectContactById(id);
+    selectGroupInAddDropdownList(name);
+    initAddContactInGroup();
+  }
+
+  private void selectGroupInAddDropdownList(String name) {
+    new Select(wd.findElement(By.name("to_group"))).selectByVisibleText(name);
+  }
+
+  private void initAddContactInGroup() {
+    click(By.name("add"));
   }
 }

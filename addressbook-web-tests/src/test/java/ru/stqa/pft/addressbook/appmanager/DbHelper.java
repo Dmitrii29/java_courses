@@ -22,7 +22,7 @@ public class DbHelper {
   public DbHelper() {
     // A SessionFactory is set up once for an application!
     final StandardServiceRegistry registry = new StandardServiceRegistryBuilder()
-            .configure()// configures settings from hibernate.cfg.xml
+            .configure("hibernate.cfg.xml")// configures settings from hibernate.cfg.xml
             .build();
 
     sessionFactory = new MetadataSources(registry).buildMetadata().buildSessionFactory();
@@ -50,6 +50,19 @@ public class DbHelper {
     session.getTransaction().commit();
     session.close();
     return new Contacts(result);
+  }
+
+  public Groups contactInGroups() {
+    Session session = sessionFactory.openSession();
+    session.beginTransaction();
+    List<ContactData> result = session.createQuery("from ContactData where deprecated = '000-00-00'").list();
+    for (ContactData contact : result) {
+      return new Groups(contact.getGroups());
+    }
+    session.getTransaction().commit();
+    session.close();
+
+    return null;
   }
 }
 
