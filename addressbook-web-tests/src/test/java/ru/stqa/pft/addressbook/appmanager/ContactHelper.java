@@ -230,4 +230,8 @@ public class ContactHelper extends HelperBase {
   private void initAddContactInGroup() {
     click(By.name("add"));
   }
+
+  public void removeContactFromGroup(int id) {
+    wd.findElement(By.cssSelector("select[name='group']>option[value='" + id + "']")).click();
+  }
 }
