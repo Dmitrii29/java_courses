@@ -5,6 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.remote.BrowserType;
+import org.openqa.selenium.remote.HttpSessionId;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -46,5 +47,17 @@ public class ApplicationManager {
 
   public void stop() {
     wd.quit();
+  }
+
+
+  //создание новой сессии, может одновременно создавать много сессий
+  public HttpSession newSession() {
+    return new HttpSession(this);
+  }
+
+
+  //достаю проперти из Local.properties
+  public  String getProperty(String key) {
+    return properties.getProperty(key);
   }
 }
