@@ -49,7 +49,7 @@ public class HttpSession {
     String body = getTextFrom(response);//получает текст ответа
 
     // проверка: текст страницы содержит имя юзера
-    return body.contains(String.format("<span class=\"italic\">%s</span>",username));
+    return body.contains(String.format("<span class=\"user-info\">%s</span>",username));
   }
 
   private String getTextFrom(CloseableHttpResponse response) throws IOException {
@@ -66,7 +66,7 @@ public class HttpSession {
     CloseableHttpResponse response = httpClient.execute(get); //выполяется get и получаем ответ
     String body = getTextFrom(response); // получаю текст ответа
     // проверка: текст страницы содержит имя юзера
-    return body.contains(String.format("<span class=\"italic\">%s</span>",username));
+    return body.contains(String.format("<span class=\"user-info\">%s</span>",username));
   }
 
 
