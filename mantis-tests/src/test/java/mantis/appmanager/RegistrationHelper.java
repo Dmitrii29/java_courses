@@ -1,4 +1,4 @@
-package ru.stqa.pft.mantis.appmanager;
+package mantis.appmanager;
 
 import org.openqa.selenium.WebDriver;
 
