@@ -18,7 +18,7 @@ import static org.testng.Assert.assertTrue;
 public class RegistrationTestsWithJason extends TestBase {
 
   @Test
-  public void testRegistration() throws IOException, MessagingException {
+  public void testRegistrationWithJason() throws IOException, MessagingException {
     long now = System.currentTimeMillis();
     String user = String.format("user%s", now);
     String password = "password";
