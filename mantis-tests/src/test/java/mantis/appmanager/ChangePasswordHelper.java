@@ -21,7 +21,7 @@ public class ChangePasswordHelper extends HelperBase {
     this.password = password;
     type(By.name("username"), user);
     type(By.name("password"), password);
-    click(By.cssSelector("\"input[value='Login']\""));
+    click(By.cssSelector("input[value='Login']"));
   }
 
   public void resetPassword(String user) {
