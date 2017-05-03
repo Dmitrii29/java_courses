@@ -18,11 +18,12 @@ public class ApplicationManager {
 
   private final Properties properties;
   private WebDriver wd;
-
   private String browser;
   private RegistrationHelper registrationHelper;
   private FtpHelper ftp;
   private MailHelper mailHelper;
+  private ChangePasswordHelper changePasswordHelper;
+  private DbHelper dbHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -33,6 +34,7 @@ public class ApplicationManager {
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
     properties.load(new FileReader(String.format("src/test/resources/%s.properties", target)));
+    dbHelper = new DbHelper();
   }
 
   public void stop() {
@@ -51,13 +53,6 @@ public class ApplicationManager {
     return properties.getProperty(key);
   }
 
-  public RegistrationHelper registration(){
-    if (registrationHelper == null) {
-      registrationHelper = new RegistrationHelper(this);
-    }
-    return registrationHelper;
-  }
-
   public FtpHelper ftp() {
     if (ftp == null) {
       ftp = new FtpHelper(this);
@@ -72,6 +67,19 @@ public class ApplicationManager {
     return mailHelper;
   }
 
+  public RegistrationHelper registration(){
+    if (registrationHelper == null) {
+      registrationHelper = new RegistrationHelper(this);
+    }
+    return registrationHelper;
+  }
+
+  public ChangePasswordHelper changePassword(){
+    if (changePasswordHelper == null) {
+      changePasswordHelper = new ChangePasswordHelper(this);
+    }
+    return changePasswordHelper;
+  }
 
   public WebDriver getDriver() {
     if (wd == null) {
@@ -86,5 +94,9 @@ public class ApplicationManager {
       wd.get(properties.getProperty("web.baseUrl"));
     }
     return wd;
+  }
+
+  public DbHelper db() {
+    return dbHelper;
   }
 }
