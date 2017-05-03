@@ -27,7 +27,6 @@ public class ChangePasswordTest extends TestBase {
   @Test
   public void changePasswordTest() throws IOException, MessagingException {
     app.getDriver();
-    //изменение паролья администратором
     app.changePassword().login("administrator", "root");
     //получение пользователя из БД
     Users listOfUsers  = app.db().users();
