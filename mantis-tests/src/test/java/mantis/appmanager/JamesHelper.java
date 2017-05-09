@@ -92,7 +92,7 @@ public class JamesHelper {
     readUntil("Password:");
     write(password);
 
-    readUntil("Welcom " + login + ". HELP for a list of commands");
+    readUntil("Welcome " + login + ". HELP for a list of commands");
   }
 
 
