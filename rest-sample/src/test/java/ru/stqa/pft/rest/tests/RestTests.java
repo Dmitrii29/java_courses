@@ -18,39 +18,20 @@ import static org.testng.Assert.assertEquals;
 /**
  * Created by Mitrich on 10.05.2017.
  */
-public class RestTests {
+public class RestTests extends TestBase {
+
+  private int issueId = 3;
 
   @Test
   public void  testCreateIssue() throws IOException {
-    Set<Issue> oldIssues = getIssues(); //множество существующих объектов issues из трекера
+    skipIfNotFixed(issueId);
+    Set<Issue> oldIssues = app.rest().getIssues(); //множество существующих объектов issues из трекера
     //создаём новый объект withSubject и withDescription
     Issue newIssue = new Issue().withSubject("Test issue Dimas").withDescription("New test issue Dimas");
     //createIssue возвращает id созданного Issue и записывает в issueId
-    int issueId = createIssue(newIssue);
-    Set<Issue> newIssues = getIssues(); //получаем новое множество объектов issues из трекера
+    int issueId = app.rest().createIssue(newIssue);
+    Set<Issue> newIssues = app.rest().getIssues(); //получаем новое множество объектов issues из трекера
     oldIssues.add(newIssue.withId(issueId));//в старое множество добавляем новый Issue и присваиваем id
     assertEquals(newIssues,oldIssues);
-  }
-
-
-  private Set<Issue> getIssues() throws IOException {
-    String json = getExecutor().execute(Request.Get("http://demo.bugify.com/api/issues.json"))
-            .returnContent().asString();
-    JsonElement parsed = new JsonParser().parse(json);
-    JsonElement issues = parsed.getAsJsonObject().get("issues");
-    return new Gson().fromJson(issues, new TypeToken<Set<Issue>>() {}.getType());
-  }
-
-  private Executor getExecutor() {
-    return Executor.newInstance().auth("LSGjeU4yP1X493ud1hNniA==", "");
-  }
-
-  private int createIssue(Issue newIssue) throws IOException {
-    String json = getExecutor().execute(Request.Post("http://demo.bugify.com/api/issues.json")
-            .bodyForm(new BasicNameValuePair("subject", newIssue.getSubject()),
-                      new BasicNameValuePair("description", newIssue.getDescription())))
-            .returnContent().asString();
-    JsonElement parsed = new JsonParser().parse(json);
-    return parsed.getAsJsonObject().get("issue_id").getAsInt();
   }
 }
