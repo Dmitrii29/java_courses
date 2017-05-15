@@ -42,7 +42,7 @@ public class ContactPhoneTests extends TestBase {
     return Arrays.asList(contact.getHomeNumber(), contact.getMobileNumber(), contact.getWorkNumber())
             .stream().filter((s) -> ! s.equals(""))
             .map(ContactPhoneTests::cleaned)
-            .collect(Collectors.joining("\n"));
+            .collect(Collectors.joining("\n2"));
     }
 
   public static String cleaned(String phone) {
