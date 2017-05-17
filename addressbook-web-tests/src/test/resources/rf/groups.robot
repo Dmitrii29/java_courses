@@ -1,5 +1,5 @@
 *** Settings ***
-Library    ru.stqa.pft.addressbook.rf.AddressbookKeywords;
+Library    ru.stqa.pft.addressbook.rf.AddressbookKeywords
 Suite Setup    Init Application Manager
 Suite Teardown    Stop Application Manager
 
